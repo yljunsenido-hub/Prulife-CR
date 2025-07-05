@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SCICController;
 
 // Show public dashboard (no login required)
 Route::view('/', 'dashboard')->name('dashboard');
@@ -31,7 +33,15 @@ Route::middleware(['auth', IsAdmin::class])->group(function () {
     })->name('admin.dashboard');
 
     // ✅ New route for sampleImport view
-    Route::view('/admin/sample-import', 'admin.sampleImport')->name('admin.sampleImport');
+    Route::get('admin/customer/import', [CustomerController::class, 'index'])->name('admin.customerImport');
+    Route::post('admin/customer/import', [CustomerController::class, 'importExcelData'])->name('admin.customerImport.store');
+
+    //SCIC Upload
+    Route::get('admin/scic-upload', [SCICController::class, 'scicUpload'])->name('admin.scicUpload');
+    Route::post('admin/scic-upload', [SCICController::class, 'importExcelData'])->name('admin.scicUpload.store');
+
+    //SCIC View
+    Route::get('admin/scic', [SCICController::class, 'scicView'])->name('admin.scicView');
 
     // Optional: Profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
