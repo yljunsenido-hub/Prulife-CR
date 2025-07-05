@@ -3,6 +3,7 @@
     <ul class="p-4 space-y-2">
         <li><a href="{{ route('admin.dashboard') }}" class="hover:text-gray-300">Dashboard</a></li>
         <li><a href="{{ route('profile.edit') }}" class="hover:text-gray-300">Profile</a></li>
+        <li><a href="{{ route('admin.sampleImport') }}" class="hover:text-gray-300">Sample Import</a></li>
         <li>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

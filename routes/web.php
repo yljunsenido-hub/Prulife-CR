@@ -30,6 +30,9 @@ Route::middleware(['auth', IsAdmin::class])->group(function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 
+    // ✅ New route for sampleImport view
+    Route::view('/admin/sample-import', 'admin.sampleImport')->name('admin.sampleImport');
+
     // Optional: Profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
